@@ -1,0 +1,14 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+  
+  <input type="button" (click)=getData() value="GET!!" /><br/>  <br/>
+  {{data}}
+  <br/>  <br/> 
+  <input [(ngModel)]="uname"><br/><br/>
+  <input [(ngModel)]="age">
+   <br/><br/>
+  <input type="button" value="POST!!" (click)="postData()" />
+</div>
