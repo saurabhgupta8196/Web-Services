@@ -1,0 +1,30 @@
+var http = require('http');
+var express = require('express');
+var parser = require('body-parser');
+var exp = express();
+var fs = require('fs');
+var cors = require('cors')
+
+exp.get("/rest/api/load", cors(), (req, res) => {
+    console.log('Load Invoked');
+    res.send({ msg: 'Give Some Rest to World' })
+})
+
+exp.route("/rest/api/get", cors()).get((req, res) => {
+    console.log('Get Invoked');
+    res.send({ msg: 'World' })
+});
+
+exp.use(parser.json());
+exp.route("/rest/api/post", cors()).post((req, res) => {
+    console.log("Post Invoked")
+    console.log(req.body);
+    fs.writeFileSync('demo.json', JSON.stringify(req.body))
+    res.status(201).send(req.body)
+});
+
+exp.route("/rest/api/get/:name", cors()).get((req, res) => {
+    res.send("Hello World" + req.params['name']);
+})
+
+exp.listen(3000, () => console.log("Running"))
